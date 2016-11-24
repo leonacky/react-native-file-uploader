@@ -12,12 +12,10 @@ let header = {
 FileUploader.setHeaders(headers)
 
 let key_upload = "file_upload";
-
 let params = {
   param1: ...,
   param2: ...
 }
-
 params[key_upload] = file_path
 
 FileUploader.upload(url, params, key_upload,  function(error, data){
