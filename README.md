@@ -1,12 +1,26 @@
-# React Native Google Login
+# React Native File Upload
 
-Support google login without google-services.json file config.
+A module support upload file to server using https://github.com/loopj/android-async-http. Support add header, multipart-form
 
 ### Usage
 ```
-var {GoogleLoginManager} = require('react-native-google-login');
+var {FileUploader} = require('react-native-file-uploader');
 
-GoogleLoginManager.login(function(error, data){
+let header = {
+}
+//Optional
+FileUploader.setHeaders(headers)
+
+let key_upload = "file_upload";
+
+let params = {
+  param1: ...,
+  param2: ...
+}
+
+params[key_upload] = file_path
+
+FileUploader.upload(url, params, key_upload,  function(error, data){
   if (!error) {
     console.log("Login data: ", data);
   } else {
@@ -20,7 +34,7 @@ GoogleLoginManager.login(function(error, data){
 
 - Run in your project:
 ```sh
-$ npm i -S https://github.com/leonacky/react-native-google-login.git
+$ npm i -S https://github.com/leonacky/react-native-file-uploader.git
 ```
 
 #### iOS
@@ -32,8 +46,8 @@ Comming soon
 
     ```
     ...
-    include ':react-native-google-login'
-    project(':react-native-google-login').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-google-login/android')
+    include ':react-native-file-uploader'
+    project(':react-native-file-uploader').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-file-uploader/android')
     ```
 
 2. In `android/app/build.gradle`
@@ -42,14 +56,14 @@ Comming soon
     ...
     dependencies {
         ...
-        compile project(':react-native-google-login')
+        compile project(':react-native-file-uploader')
     }
     ```
 
 3. Register module (in MainApplication.java)
 
     ```
-    import com.aotasoft.rngooglelogin.GoogleLoginPackage;  // <--- import
+    import com.aotasoft.rngooglelogin.FileUploaderPackage;  // <--- import
 
     public class MainApplication extends Application implements ReactApplication {
       ......
@@ -60,26 +74,12 @@ Comming soon
           new MainReactPackage(),
           new VectorIconsPackage(),
           new OrientationPackage(this),
-          new GoogleLoginPackage()   // <--- Add here!
+          new FileUploaderPackage()   // <--- Add here!
       );
     }
 
       ......
 
     }
-    ```
-4. Add Server Api Key to get token (optional)
-
-    in strings.xml add: 
-    
-    ```
-    <string name="rn_google_server_key">xxxxxxxxx.apps.googleusercontent.com</string>
-    ```
-    
-    in manifest.xml add: 
-    
-    ```
-    <meta-data android:name="rn_google_server_key" android:value="@string/rn_google_server_key" />
-
     ```
 
