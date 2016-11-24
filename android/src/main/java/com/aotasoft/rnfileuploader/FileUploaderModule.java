@@ -1,6 +1,7 @@
 package com.aotasoft.rnfileuploader;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import com.facebook.react.bridge.Arguments;
@@ -103,7 +104,16 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
         final WritableMap map = Arguments.createMap();
         final WritableMap data = Arguments.createMap();
         if(params.hasKey(key_upload)) {
-            final String file_upload = params.getString(key_upload);
+            String tmp_file = params.getString(key_upload);
+            try {
+                if(tmp_file.startsWith("content://")) {
+                    Uri uri = Uri.parse(tmp_file);
+                    tmp_file = FileUtils.getPath(mReactContext, uri);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            final String file_upload = tmp_file;
             File file = new File(file_upload);
             if(file.exists()) {
                 try {
