@@ -43,7 +43,7 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "RNGoogleLoginModule";
+        return "FileUploader";
     }
 
     private void consumeCallback(String type, WritableMap map) {
