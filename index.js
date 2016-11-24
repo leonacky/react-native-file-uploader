@@ -3,9 +3,9 @@ import {
 } from 'react-native';
 
 
-const GoogleLoginManager = NativeModules.RNGoogleLoginModule;
+const FileUploader = NativeModules.FileUploader;
 
 
 module.exports =  {
-  GoogleLoginManager
+  FileUploader
 };
