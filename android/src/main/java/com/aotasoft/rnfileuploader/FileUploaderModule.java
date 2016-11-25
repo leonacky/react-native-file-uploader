@@ -129,7 +129,7 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
                                     map.putInt("code", statusCode);
                                     data.putString("result", result);
                                     map.putMap("data", data);
-                                    consumeCallback(CALLBACK_TYPE_ERROR, map);
+                                    consumeCallback(CALLBACK_TYPE_SUCCESS, map);
                                     return;
                                 }
                             } catch (Exception e) {
