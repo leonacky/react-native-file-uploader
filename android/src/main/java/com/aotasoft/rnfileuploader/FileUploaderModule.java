@@ -157,7 +157,7 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
                     consumeCallback(CALLBACK_TYPE_ERROR, map);
                 } catch (Exception e) {
                     map.putInt("code", 400);
-                    data.putString("error", "File "+file_upload+" cannot upload. Please try again");
+                    data.putString("error", "File "+file_upload+" cannot upload. Please try again"+"\n"+e.toString());
                     map.putMap("data", data);
                     consumeCallback(CALLBACK_TYPE_ERROR, map);
                 }
