@@ -61,7 +61,7 @@ Comming soon
 3. Register module (in MainApplication.java)
 
     ```
-    import com.aotasoft.rngooglelogin.FileUploaderPackage;  // <--- import
+    import com.aotasoft.rnfileuploader.FileUploaderPackage;  // <--- import
 
     public class MainApplication extends Application implements ReactApplication {
       ......
