@@ -136,16 +136,21 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
                                 e.printStackTrace();
                             }
                             map.putInt("code", statusCode);
-                            map.putString("code", String.valueOf(statusCode));
-                            data.putString("error", "File "+file_upload+" cannot upload. Please try again");
+                            data.putString("error", "onSuccess: File "+file_upload+" cannot upload. Please try again");
                             map.putMap("data", data);
                             consumeCallback(CALLBACK_TYPE_ERROR, map);
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                            try {
+                                String result = new String(responseBody);
+                                data.putString("result", result);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             map.putInt("code", statusCode);
-                            data.putString("error", "File "+file_upload+" cannot upload. Please try again");
+                            data.putString("error", "onFailure: File "+file_upload+" cannot upload. Please try again.");
                             map.putMap("data", data);
                             consumeCallback(CALLBACK_TYPE_ERROR, map);
                         }
