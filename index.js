@@ -3,7 +3,7 @@ import {
 } from 'react-native';
 
 
-const FileUploader = NativeModules.FileUploader;
+const FileUploader = NativeModules.RNFileUploader;
 
 
 module.exports =  {
