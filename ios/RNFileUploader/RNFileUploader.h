@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RCTBridgeModule.h"
 
-@interface RNFileUploader : NSObject
+@interface RNFileUploader : NSObject<RCTBridgeModule>
+    NSMutableData *responseData;
+    NSInteger responseStatusCode;
 
+    NSURLConnection *connection;
+    NSMutableURLRequest *request;
+    NSMutableData *requestBody;
+
+    NSString *formBoundaryString;
+    NSData *formBoundaryData;
+
+    dispatch_group_t fgroup;
 @end
