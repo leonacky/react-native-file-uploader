@@ -96,9 +96,15 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
             }
         }
     }
-
+    
+    
     @ReactMethod
     public void upload(String url, ReadableMap params, ReadableMap fileUpload, final Callback callback) {
+        upload(url, params, fileUpload, callback, "POST");
+    }
+
+    @ReactMethod
+    public void upload(String url, ReadableMap params, ReadableMap fileUpload, final Callback callback, final String method) {
         this.mTokenCallback = callback;
         final WritableMap map = Arguments.createMap();
         final WritableMap data = Arguments.createMap();
