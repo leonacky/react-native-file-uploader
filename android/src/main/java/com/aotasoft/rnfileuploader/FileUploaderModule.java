@@ -44,7 +44,7 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "FileUploader";
+        return "RNFileUploader";
     }
 
     private void consumeCallback(String type, WritableMap map) {
