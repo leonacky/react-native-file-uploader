@@ -34,6 +34,7 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
     Callback mTokenCallback;
 
     String TAG = "FileUploaderModule";
+    String method = "POST";
 
     AsyncHttpClient client = new AsyncHttpClient();
 
@@ -99,12 +100,12 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
     
     
     @ReactMethod
-    public void upload(String url, ReadableMap params, ReadableMap fileUpload, final Callback callback) {
-        upload(url, params, fileUpload, callback, "POST");
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     @ReactMethod
-    public void upload(String url, ReadableMap params, ReadableMap fileUpload, final Callback callback, final String method) {
+    public void upload(String url, ReadableMap params, ReadableMap fileUpload, final Callback callback) {
         this.mTokenCallback = callback;
         final WritableMap map = Arguments.createMap();
         final WritableMap data = Arguments.createMap();
