@@ -10,10 +10,20 @@
 
 @interface RNFileUploader() {
     RCTResponseSenderBlock mCallback;
+    NSString *method;
 }
 @end
 
 @implementation RNFileUploader
+    
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.method = @"POST";
+    }
+    return self;
+}
 
 RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(cancel){
@@ -35,12 +45,12 @@ RCT_EXPORT_METHOD(setHeaders:(NSDictionary *)headers) {
     }
 }
 
-RCT_EXPORT_METHOD(upload: (NSString *)uploadURL params:(NSDictionary *)params fileUpload:(NSDictionary *)fileUpload  callback:(RCTResponseSenderBlock) callback)
+RCT_EXPORT_METHOD(setMethod: (NSString *)method)
 {
-    [self upload:uploadURL params:params fileUpload:fileUpload callback:callback method:@"POST"]
+    self.method = method;
 }
 
-RCT_EXPORT_METHOD(upload: (NSString *)uploadURL params:(NSDictionary *)params fileUpload:(NSDictionary *)fileUpload  callback:(RCTResponseSenderBlock)callback method:(NSString *) method)
+RCT_EXPORT_METHOD(upload: (NSString *)uploadURL params:(NSDictionary *)params fileUpload:(NSDictionary *)fileUpload  callback:(RCTResponseSenderBlock)callback)
 {
     mCallback = callback;
     NSURL *url = [NSURL URLWithString:uploadURL];
@@ -53,8 +63,8 @@ RCT_EXPORT_METHOD(upload: (NSString *)uploadURL params:(NSDictionary *)params fi
     self.requestBody  = [[NSMutableData alloc] init];
     self.fgroup       = dispatch_group_create();
     
-    if( [method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] ){
-        [self.request setHTTPMethod:method];
+    if( [self.method isEqualToString:@"POST"] || [self.method isEqualToString:@"PUT"] ){
+        [self.request setHTTPMethod:self.method];
     }else{
         [self.request setHTTPMethod:@"POST"];
     }
