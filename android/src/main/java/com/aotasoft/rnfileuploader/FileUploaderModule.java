@@ -60,12 +60,11 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
         }
     }
 
-    RequestParams getParams(ReadableMap map, String key_upload) {
+    RequestParams getParams(ReadableMap map) {
         ReadableMapKeySetIterator iterator = map.keySetIterator();
         RequestParams params = new RequestParams();
         while (iterator.hasNextKey()) {
             String key = iterator.nextKey();
-            if(key.equals(key_upload)) continue;
             switch (map.getType(key)) {
                 case Null:
                     break;
@@ -99,12 +98,12 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void upload(String url, ReadableMap params, String key_upload, final Callback callback) {
+    public void upload(String url, ReadableMap params, ReadableMap fileUpload, final Callback callback) {
         this.mTokenCallback = callback;
         final WritableMap map = Arguments.createMap();
         final WritableMap data = Arguments.createMap();
-        if(params.hasKey(key_upload)) {
-            String tmp_file = params.getString(key_upload);
+        if(fileUpload.hasKey("filepath") && fileUpload.hasKey("name")) {
+            String tmp_file = fileUpload.getString("filepath");
             try {
                 if(tmp_file.startsWith("content://")) {
                     Uri uri = Uri.parse(tmp_file);
@@ -117,8 +116,8 @@ public class FileUploaderModule extends ReactContextBaseJavaModule {
             File file = new File(file_upload);
             if(file.exists()) {
                 try {
-                    RequestParams _params = getParams(params, key_upload);
-                    _params.put(key_upload, file);
+                    RequestParams _params = getParams(params);
+                    _params.put(fileUpload.getString("name"), file);
 
                     client.post(url, _params, new AsyncHttpResponseHandler() {
                         @Override
