@@ -8,17 +8,29 @@
 
 #import <Foundation/Foundation.h>
 #import "RCTBridgeModule.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Foundation/Foundation.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <UIKit/UIKit.h>
 
-@interface RNFileUploader : NSObject<RCTBridgeModule>
-    NSMutableData *responseData;
-    NSInteger responseStatusCode;
+#import "RCTEventDispatcher.h"
+#import "RCTLog.h"
+#include <dispatch/dispatch.h>
 
-    NSURLConnection *connection;
-    NSMutableURLRequest *request;
-    NSMutableData *requestBody;
 
-    NSString *formBoundaryString;
-    NSData *formBoundaryData;
+@interface RNFileUploader : NSObject <RCTBridgeModule, NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 
-    dispatch_group_t fgroup;
+@property NSMutableData *responseData;
+@property NSInteger responseStatusCode;
+
+@property NSURLConnection *connection;
+@property NSMutableURLRequest *request;
+@property NSMutableData *requestBody;
+
+@property NSString *formBoundaryString;
+@property NSData *formBoundaryData;
+
+@property dispatch_group_t fgroup;
+@property NSMutableArray *files;
+
 @end
