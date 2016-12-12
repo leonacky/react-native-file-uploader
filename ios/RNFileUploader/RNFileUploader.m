@@ -134,6 +134,8 @@ RCT_EXPORT_METHOD(upload: (NSString *)uploadURL
         NSString *filetype = file[@"filetype"];
         NSData *data       = file[@"data"];
         
+//        NSLog(@"%@", name);
+        
         [self.requestBody appendData:self.formBoundaryData];
         [self.requestBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", name.length ? name : filename, filename] dataUsingEncoding:NSUTF8StringEncoding]];
         
@@ -198,6 +200,7 @@ RCT_EXPORT_METHOD(upload: (NSString *)uploadURL
     }else{
         NSString *filepath = _file[@"filepath"];
         NSURL *fileUrl = [[NSURL alloc] initWithString:filepath];
+        _file[@"filename"] = [[fileUrl path] lastPathComponent];
         
         if ( [filepath hasPrefix:@"data:"] || [filepath hasPrefix:@"file:"]) {
             _file[@"data"] = [NSData dataWithContentsOfURL: fileUrl];
