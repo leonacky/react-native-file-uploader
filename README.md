@@ -11,14 +11,17 @@ let header = {
 //Optional
 FileUploader.setHeaders(headers)
 
-let key_upload = "file_upload";
 let params = {
   param1: ...,
   param2: ...
 }
-params[key_upload] = file_path
 
-FileUploader.upload(url, params, key_upload,  function(error, data){
+let fileUpload = {
+  name: 'field_upload',
+  filepath: 'path or uri of file'
+}
+
+FileUploader.upload(url, params, fileUpload,  function(error, data){
   if (!error) {
     console.log("Login data: ", data);
   } else {
