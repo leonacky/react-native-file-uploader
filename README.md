@@ -1,6 +1,6 @@
 # React Native File Upload
 
-A module support upload file to server using https://github.com/loopj/android-async-http. Support add header, multipart-form
+A module support upload file to server. Support add header, multipart-form
 
 ### Usage
 ```
