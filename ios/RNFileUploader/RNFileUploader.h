@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Foundation/Foundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <UIKit/UIKit.h>
 
-#import "RCTEventDispatcher.h"
-#import "RCTLog.h"
+#import <React/RCTEventDispatcher.h>
+#import <React/RCTLog.h>
 #include <dispatch/dispatch.h>
 
 
